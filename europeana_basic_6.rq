@@ -1,0 +1,27 @@
+#+ endpoint: http://sparql.europeana.eu/
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX ore: <http://www.openarchives.org/ore/terms/>
+PREFIX html: <http://www.w3.org/1999/xhtml/vocab#>
+
+SELECT ?title ?creator ?img_url ?eur_aggr
+WHERE {
+?object edm:type "IMAGE" .
+?object dc:title ?title .
+?object dc:creator ?creator .
+
+?object ore:proxyIn ?local_aggr .
+?object ore:proxyFor ?cho .
+
+?eur_aggr edm:aggregatedCHO ?cho .
+?eur_aggr a edm:EuropeanaAggregation .
+
+?local_aggr edm:provider ?glam_inst .
+?eur_aggr edm:country 'belgium' .
+?eur_aggr edm:language ?lang .
+?eur_aggr edm:language 'nl' .
+
+OPTIONAL{ ?local_aggr edm:object ?img_url . } .
+
+
+}
