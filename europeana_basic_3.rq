@@ -1,0 +1,21 @@
+#+ endpoint: http://sparql.europeana.eu/
+PREFIX dc:      <http://purl.org/dc/elements/1.1/>
+PREFIX edm:     <http://www.europeana.eu/schemas/edm/>
+PREFIX ore:     <http://www.openarchives.org/ore/terms/>
+
+SELECT ?title ?type ?institution ?rights 
+WHERE {
+
+    ?object dc:title ?title .
+    ?object dc:date ?date .
+    ?object dc:type ?type .
+    ?object dc:identifier ?id .
+    
+    ?object ore:proxyIn ?aggr .
+    
+    ?aggr edm:dataProvider ?institution .
+    ?aggr edm:rights ?rights .
+    
+
+}
+LIMIT 10
