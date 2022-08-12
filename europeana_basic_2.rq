@@ -1,0 +1,18 @@
+PREFIX dc:      <http://purl.org/dc/elements/1.1/>
+PREFIX edm:     <http://www.europeana.eu/schemas/edm/>
+PREFIX ore:     <http://www.openarchives.org/ore/terms/>
+
+SELECT ?title ?type ?date
+WHERE {
+
+    ?object dc:title ?title .
+    ?object dc:date ?date .
+    ?object dc:type ?type .
+    ?object dc:identifier ?id
+    OPTIONAL{
+    ?object dc:publisher ?pub .
+    ?object dc:created ?cr . } .
+    
+    ?object dc:type 'IMAGE' . 
+
+}
