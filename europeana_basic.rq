@@ -1,0 +1,15 @@
+PREFIX dc:      <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX edm:     <http://www.europeana.eu/schemas/edm/>
+PREFIX ore:     <http://www.openarchives.org/ore/terms/>
+
+SELECT ?title ?type ?date 
+WHERE {
+
+    ?object dc:title ?title .
+    ?object dc:type ?type .
+    ?object dcterms:created ?date .
+
+}
+ORDER BY ?title
+LIMIT 10
