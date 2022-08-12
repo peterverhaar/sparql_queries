@@ -1,0 +1,15 @@
+#+ endpoint: http://sparql.europeana.eu/
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX edm: <http://www.europeana.eu/schemas/edm/>
+PREFIX ore: <http://www.openarchives.org/ore/terms/>
+PREFIX html: <http://www.w3.org/1999/xhtml/vocab#>
+
+SELECT ?title ?object ?local_aggr
+WHERE {
+
+?object dc:title ?title .
+?object ore:proxyIn ?local_aggr .
+
+?local_aggr edm:dataProvider "Rijksmuseum" .
+}
+LIMIT 40
