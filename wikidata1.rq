@@ -1,3 +1,5 @@
+#+ endpoint: https://query.wikidata.org/sparql
+
 SELECT ?author ?authorLabel ?image ?genderLabel ?nationalityLabel ?birth_date ?birth_placeLabel ?educationLabel
 
 WHERE {
