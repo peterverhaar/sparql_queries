@@ -1,0 +1,51 @@
+endpoint = 'https://api.data.netwerkdigitaalerfgoed.nl/datasets/rkd/rkdartists/services/rkdartists-jena/sparql'
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rkdo: <http://data.rkd.nl/def#>
+PREFIX schema: <http://schema.org/>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+
+SELECT ?name ?gender ?nationality ?id ?add ?alternate ?pob ?birth_date 
+?pod ?death_date ?edu_name  ?title ?image ?event ?event_desc ?event_location ?event_lat  ?event_long  ?event_date 
+
+WHERE {
+
+?artist schema:identifier '56854' .
+?artist schema:name ?name .
+OPTIONAL { ?artist schema:gender ?gender . } .
+OPTIONAL { ?artist schema:nationality ?nationality . } .
+OPTIONAL { ?artist schema:identifier ?id . } .
+OPTIONAL { ?artist schema:additionalType ?add . } .
+OPTIONAL { ?artist schema:alternateName ?alternate . } .
+
+?artist rkdo:Birth ?birth .
+OPTIONAL { ?birth schema:location ?pob . } .
+OPTIONAL { ?birth schema:startDate ?birth_date  . } .
+
+  
+?artist rkdo:Death ?death .
+OPTIONAL { ?death schema:location ?pod . } .
+OPTIONAL { ?death schema:startDate ?death_date . } .
+  
+?artist rkdo:Education ?edu .
+OPTIONAL { ?edu schema:name ?edu_name. } .
+  
+?artist schema:event ?event.
+OPTIONAL { ?event schema:description ?event_desc . } .
+OPTIONAL { ?event schema:location ?event_location . } .
+OPTIONAL { ?event schema:latitude ?event_lat . } .
+OPTIONAL { ?event schema:longitude ?event_long . } .
+OPTIONAL { ?event schema:startDate ?event_date .} .
+
+service <https://query.wikidata.org/bigdata/namespace/wdq/sparql> {
+
+?work wdt:P31 wd:Q3305213;
+    wdt:P170 wd:Q151803;
+    wdt:P18 ?image;
+    wdt:P1476 ?title;
+}
+  
+FILTER (lang(?name) = 'nl')
+}
